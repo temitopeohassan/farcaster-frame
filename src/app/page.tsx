@@ -1,8 +1,8 @@
-import { getFrameMetadata } from '@coinbase/onchainkit';
+import { getFrameMetadata as fetchFrameMetadata } from '@coinbase/onchainkit';
 import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from './config';
 
-const frameMetadata = getFrameMetadata({
+const frameMetadata = fetchFrameMetadata({
   buttons: [
     {
       label: 'Trending Rounds',
@@ -14,20 +14,20 @@ const frameMetadata = getFrameMetadata({
     },
   ],
   image: {
-    src: `${NEXT_PUBLIC_URL}/rounds_frame.JPG`,
+    src: `${NEXT_PUBLIC_URL}/rounds.PNG`,
     aspectRatio: '1:1',
   },
-  postUrl: `${NEXT_PUBLIC_URL}/api/trendingRounds`,
+  postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(NEXT_PUBLIC_URL),
-  title: 'Crypto Rounds Frames - Powered by Rounds.wtf',
-  description: 'Explore the latest rounds in the crypto space',
+  title: 'Rounds Frame - Powered by Rounds.wtf',
+  description: 'Explore the latest rounds on Rounds.wtf',
   openGraph: {
-    title: 'Crypto Rounds Frames - Powered by Rounds.wtf',
-    description: 'Explore the latest rounds in the crypto space',
-    images: [`${NEXT_PUBLIC_URL}/rounds_frame.JPG`],
+    title: 'Rounds Frame - Powered by Rounds.wtf',
+    description: 'Explore the latest rounds on Rounds.wtf',
+    images: [`${NEXT_PUBLIC_URL}/rounds.PNG`],
   },
   other: {
     ...frameMetadata,
