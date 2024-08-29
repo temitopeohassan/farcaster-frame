@@ -1,51 +1,61 @@
-"use client";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getFrameMetadata } from '@coinbase/onchainkit';
+import type { Metadata } from 'next';
+import { NEXT_PUBLIC_URL } from './config';
 
-// Define the Community interface
-interface Community {
-  id: string;
-  name: string;
-  description: string;
-  // Add any other fields you expect from the API
+const frameMetadata = getFrameMetadata({
+  buttons: [
+    {
+      label: 'Trending Rounds',
+    },
+    {
+      action: 'link',
+      label: 'Visit Rounds.wtf',
+      target: 'https://rounds.wtf',
+    },
+  ],
+  image: {
+    src: `${NEXT_PUBLIC_URL}/rounds_frame.JPG`,
+    aspectRatio: '1:1',
+  },
+  postUrl: `${NEXT_PUBLIC_URL}/api/trendingRounds`,
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(NEXT_PUBLIC_URL),
+  title: 'Crypto Rounds Frames - Powered by Rounds.wtf',
+  description: 'Explore the latest rounds in the crypto space',
+  openGraph: {
+    title: 'Crypto Rounds Frames - Powered by Rounds.wtf',
+    description: 'Explore the latest rounds in the crypto space',
+    images: [`${NEXT_PUBLIC_URL}/rounds_frame.JPG`],
+  },
+  other: {
+    ...frameMetadata,
+  },
+};
+
+export default async function Page() {
+  const response = await fetch('https://rounds.wtf/api/public/v1/rounds', {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json',
+    },
+  });
+  const data = await response.json();
+
+  return (
+    <>
+      <h1>Welcome to the Rounds Frame - Powered by Rounds.wtf</h1>
+      <ul>
+        {data.data.map((round: any) => (
+          <li key={round.id}>
+            <strong>{round.attributes.name}</strong>
+            <p>{round.attributes.description}</p>
+            <p>Start Time: {new Date(round.attributes.start_time).toLocaleString()}</p>
+            <p>End Time: {new Date(round.attributes.end_time).toLocaleString()}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
-
-const fetchCommunityData = async (): Promise<Community[]> => {
-  try {
-    const response = await axios.get('https://api.rounds.wtf/communities');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching community data:', error);
-    return [];
-  }
-};
-
-const CommunityList = () => {
-  const [communities, setCommunities] = useState<Community[]>([]);
-
-  useEffect(() => {
-    fetchCommunityData().then(setCommunities);
-  }, []);
-
-  return (
-    <div>
-      {communities.map((community) => (
-        <div key={community.id}>
-          <h3>{community.name}</h3>
-          <p>{community.description}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const Page = () => {
-  return (
-    <div>
-      <h1>Farcaster Community Frame</h1>
-      <CommunityList />
-    </div>
-  );
-};
-
-export default Page;
