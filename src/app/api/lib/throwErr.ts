@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL } from '../../app/config';
+import { NEXT_PUBLIC_URL } from '../../config';
 
 export function throwErr(imageName: string): NextResponse {
   return new NextResponse(
