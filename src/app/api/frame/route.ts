@@ -64,7 +64,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       return errorResponse('Invalid round data');
     }
 
-    const imageUrl = `${NEXT_PUBLIC_URL}/rounds.PNG`;
+    const imageUrl = `${NEXT_PUBLIC_URL}/ok.png`;
     console.log('Image URL:', imageUrl);
 
     const html = `
@@ -111,7 +111,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 function errorResponse(message: string): NextResponse {
   console.log('Generating error response:', message);
-  const imageUrl = `${NEXT_PUBLIC_URL}/error.PNG`;
+  const imageUrl = `${NEXT_PUBLIC_URL}/error.png`;
   const html = `
     <!DOCTYPE html>
     <html>

@@ -35,3 +35,15 @@
 button {
   margin: 0 10px;
 }
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Text color */
+  text-align: center; /* Center text */
+  background: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for better readability */
+  padding: 20px; /* Optional: padding around the text */
+  border-radius: 10px; /* Optional: rounded corners */
+}
