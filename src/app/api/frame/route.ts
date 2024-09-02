@@ -111,7 +111,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 function errorResponse(message: string): NextResponse {
   console.log('Generating error response:', message);
-  const imageUrl = `${NEXT_PUBLIC_URL}/error.png`;
+  const imageUrl = `${NEXT_PUBLIC_URL}/error.PNG`;
   const html = `
     <!DOCTYPE html>
     <html>

@@ -16,7 +16,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
       },
     ],
     image: {
-      src: `${NEXT_PUBLIC_URL}/rounds.png`,
+      src: `${NEXT_PUBLIC_URL}/rounds.PNG`,
       aspectRatio: '1:1',
     },
     ...(await fetchMetadata(
@@ -38,7 +38,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
     openGraph: {
       title: 'Rounds Frame - Powered by Rounds.wtf',
       description: 'Explore the latest rounds on Rounds.wtf',
-      images: [`${NEXT_PUBLIC_URL}/rounds.png`],
+      images: [`${NEXT_PUBLIC_URL}/rounds.PNG`],
     },
     other: {
       ...frameMetadata,
